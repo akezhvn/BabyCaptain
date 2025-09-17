@@ -2,7 +2,7 @@ import telebot
 from telebot import types
 import openpyxl
 
-bot = telebot.TeleBot("7119147941:AAHB4AuZZQygzTd69mmdtlnEPP-KUlaLh4Y")
+bot = telebot.TeleBot("SECRET")
 
 user_data = {}
 
