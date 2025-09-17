@@ -7,7 +7,7 @@ bot = telebot.TeleBot("SECRET")
 user_data = {}
 
 
-# to save anything in excelfile
+# excel
 def save_data(fio, phone, ticket_number, user_id):
     wb = openpyxl.load_workbook('data.xlsx')
     ws = wb.active
@@ -23,21 +23,21 @@ def start_message(message):
     bot.register_next_step_handler(message, input_fio)
 
 
-# Обработчик для ввода ФИО
+# name
 def input_fio(message):
     user_data[message.chat.id]['fio'] = message.text
     bot.send_message(message.chat.id, "Введите номер телефона:")
     bot.register_next_step_handler(message, input_phone)
 
 
-# handler phone
+# phone
 def input_phone(message):
     user_data[message.chat.id]['phone'] = message.text
     bot.send_message(message.chat.id, "Билет номерін енгізіңіз:")
     bot.register_next_step_handler(message, input_ticket_number)
 
 
-# handler ticket number
+#ticket number
 def input_ticket_number(message):
     if ticket_number_exists(message.text):
         bot.send_message(message.chat.id, "Бұл билет тіркелген, басқа номер енгізіңіз::")
@@ -48,7 +48,7 @@ def input_ticket_number(message):
         bot.register_next_step_handler(message, input_ticket_photo)
 
 
-# ticket image handler
+# ticket image
 def input_ticket_photo(message):
     user_id = message.from_user.id
     ticket_number = user_data[message.chat.id]['ticket_number']
@@ -76,5 +76,5 @@ def ticket_number_exists(ticket_number):
     return False
 
 
-# run
+
 bot.polling()
